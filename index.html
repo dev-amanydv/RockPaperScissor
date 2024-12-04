@@ -1,204 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rock Paper Scissor</title>
-  <style>
-   * {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive RockPaperScissor</title>
+    <style>
+      * {
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
       }
       .container {
         background-color: rgb(110, 4, 23);
-        height: 100vh;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
       }
       .title {
         color: rgb(246, 248, 250);
-        padding: 20vw;
-        font-size: 40px;
-        padding-top: 50px;
-        padding-bottom: 50px;
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
+        font-size: 6vw;
+        text-align: center;
+        margin-bottom: 20px;
       }
       .play-buttons {
         display: flex;
         gap: 20px;
-        margin-left: 18vw;
-      }
-      .play-buttons button {
-        text-align: center;
-        height: 50px;
-        width: 100px;
-        font-size: 20px;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
-        border: 4px solid black;
-        border-radius: 10px;
-        margin: 20px;
-        background-color: rgb(0, 0, 9);
-        color: rgb(14, 241, 10);
-      }
-      .cir {
-        border-radius: 50px;
-        overflow: hidden;
-        border: 3px solid black;
-      }
-      .cir:hover {
-        border-radius: 50px;
-        overflow: hidden;
-        border: 5px solid black;
-        scale: 1.2;
-      }
-      .play-buttons button:hover {
-        text-align: center;
-        height: 50px;
-        width: 100px;
-        font-size: 25px;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
-        border: 2px solid rgb(250, 248, 248);
-        border-radius: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
       }
       .btn {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
       }
-      .reset-buttons button {
-        text-align: center;
-        height: 50px;
-        width: 150px;
-        font-size: 20px;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        border: 4px solid black;
-        border-radius: 10px;
-        margin: 20px;
-        background-color: black;
-        color: red;
-        margin-left: 38vw;
+      .play-buttons img {
+        border-radius: 50%;
+        border: 3px solid black;
+        transition: transform 0.3s, border 0.3s;
       }
-      .reset-buttons button:hover {
-        text-align: center;
-        height: 50px;
-        width: 150px;
-        font-size: 25px;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
-        border: 2px solid rgb(255, 255, 255);
+      .play-buttons img:hover {
+        transform: scale(1.2);
+        border: 5px solid black;
+      }
+      .play-buttons button {
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        border: 3px solid black;
         border-radius: 10px;
-        margin: 20px;
-        margin-left: 38vw;
+        background-color: rgb(0, 0, 9);
+        color: rgb(14, 241, 10);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .play-buttons button:hover {
+        font-size: 1.2rem;
+        border-color: white;
       }
       .score-board {
-        margin: 30px;
-        margin-left: 28vw;
-        font-size: 25px;
-        display: flex;
-        flex-direction: column;
         background-color: rgb(2, 5, 8);
-        height: 150px;
-        width: 300px;
+        padding: 20px;
         border-radius: 5px;
         color: rgb(189, 190, 187);
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-align: center;
+        font-size: 1.5rem;
+        width: 80%;
+        max-width: 300px;
+      }
+      .reset-buttons {
+        text-align: center;
+      }
+      .reset-buttons button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border: 3px solid black;
+        border-radius: 10px;
+        background-color: black;
+        color: red;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .reset-buttons button:hover {
+        font-size: 1.2rem;
+        border-color: white;
+      }
+      #result {
+        text-align: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-top: 20px;
       }
 
-
-
-
-
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="title">
-      <img
-        class="logo"
-        src="./rock-paper-scissors.png"
-        alt=""
-        height="50"
-      />Rock Paper Scissor
-    </div>
-    <div class="play-buttons">
-      <div class="rock btn">
-        <img class="cir" src="./rock.jpg" alt="" height="100" width="100" />
-        <button onclick="playGame('rock');">Rock</button>
-      </div>
-      <div class="paper btn">
-        <img class="cir" src="./paper.jpg" alt="" height="100" width="100" />
-        <button onclick="playGame('paper');">Paper</button>
-      </div>
-      <div class="scissor btn">
-        <img
-          class="cir"
-          src="./vecteezy_different-but-same-rock-paper-scissors-and-diversity-hand_21016764.jpg"
-          alt=""
-          height="100"
-          width="100"
-        />
-        <button onclick="playGame('scissor');">Scissor</button>
-      </div>
-    </div>
-    <div class="score-board">
-      <div class="wins">WINS: 0</div>
-      <div class="loss">LOSSES: 0</div>
-      <div class="ties">TIES: 0</div>
-    </div>
-    <div class="reset-buttons">
-      <button onclick="resetScore();">Reset Score</button>
-    </div>
-  </div>
-  <script>
-    let score = { wins: 0, loss: 0, tie: 0 };
-
-    function playGame(playerMove) {
-      const computerMove = pickComputerMove();
-      let result = "";
-
-      if (playerMove === computerMove) {
-        result = "tie";
-        score.tie++;
-      } else if (
-        (playerMove === "rock" && computerMove === "scissor") ||
-        (playerMove === "paper" && computerMove === "rock") ||
-        (playerMove === "scissor" && computerMove === "paper")
-      ) {
-        result = "You won";
-        score.wins++;
-      } else {
-        result = "You lost";
-        score.loss++;
+      /* Responsive Styling */
+      @media (max-width: 768px) {
+        .title {
+          font-size: 8vw;
+        }
+        .play-buttons {
+          gap: 15px;
+        }
+        .play-buttons button {
+          font-size: 0.9rem;
+        }
+        .score-board {
+          font-size: 1.2rem;
+        }
+        .reset-buttons button {
+          font-size: 0.9rem;
+        }
       }
 
-      
-      updateScoreBoard();
-    }
+      @media (max-width: 480px) {
+        .title {
+          font-size: 10vw;
+        }
+        .play-buttons img {
+          width: 80px;
+          height: 80px;
+        }
+        .play-buttons button {
+          font-size: 0.8rem;
+        }
+        .score-board {
+          font-size: 1rem;
+        }
+        .reset-buttons button {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Rock Paper Scissor</div>
+      <div class="play-buttons">
+        <div class="btn">
+          <img class="cir" src="./rock.jpg" alt="Rock" width="100" height="100" />
+          <button onclick="playGame('rock')">Rock</button>
+        </div>
+        <div class="btn">
+          <img class="cir" src="./paper.jpg" alt="Paper" width="100" height="100" />
+          <button onclick="playGame('paper')">Paper</button>
+        </div>
+        <div class="btn">
+          <img
+            class="cir"
+            src="./scissor.jpg"
+            alt="Scissor"
+            width="100"
+            height="100"
+          />
+          <button onclick="playGame('scissor')">Scissor</button>
+        </div>
+      </div>
+      <div class="score-board">
+        <div>WINS: <span id="wins">0</span></div>
+        <div>LOSSES: <span id="losses">0</span></div>
+        <div>TIES: <span id="ties">0</span></div>
+      </div>
+      <div class="reset-buttons">
+        <button onclick="resetScore()">Reset Score</button>
+      </div>
+      <div id="result"></div>
+    </div>
+    <script>
+      let score = { wins: 0, loss: 0, tie: 0 };
 
-    function pickComputerMove() {
-      const randomNumber = Math.random();
-      if (randomNumber < 1 / 3) return "rock";
-      else if (randomNumber < 2 / 3) return "paper";
-      else return "scissor";
-    }
+      function playGame(playerMove) {
+        const computerMove = pickComputerMove();
+        let result = "";
 
-    function updateScoreBoard() {
-      document.querySelector(".wins").textContent = `WINS: ${score.wins}`;
-      document.querySelector(".loss").textContent = `LOSSES: ${score.loss}`;
-      document.querySelector(".ties").textContent = `TIES: ${score.tie}`;
-    }
+        if (playerMove === computerMove.toLowerCase()) {
+          result = "It's a tie!";
+          score.tie++;
+        } else if (
+          (playerMove === "rock" && computerMove === "Scissor") ||
+          (playerMove === "paper" && computerMove === "Rock") ||
+          (playerMove === "scissor" && computerMove === "Paper")
+        ) {
+          result = "You won!";
+          score.wins++;
+        } else {
+          result = "You lost!";
+          score.loss++;
+        }
 
-    function resetScore() {
-      score = { wins: 0, loss: 0, tie: 0 };
-      updateScoreBoard();
-    }
-  </script>
-</body>
+        document.getElementById("wins").textContent = score.wins;
+        document.getElementById("losses").textContent = score.loss;
+        document.getElementById("ties").textContent = score.tie;
+        document.getElementById("result").textContent = `You chose ${playerMove}, computer chose ${computerMove}. ${result}`;
+      }
+
+      function pickComputerMove() {
+        const randomNumber = Math.random();
+        if (randomNumber < 1 / 3) return "Rock";
+        if (randomNumber < 2 / 3) return "Paper";
+        return "Scissor";
+      }
+
+      function resetScore() {
+        score = { wins: 0, loss: 0, tie: 0 };
+        document.getElementById("wins").textContent = score.wins;
+        document.getElementById("losses").textContent = score.loss;
+        document.getElementById("ties").textContent = score.tie;
+        document.getElementById("result").textContent = "Scoreboard Reset!";
+      }
+    </script>
+  </body>
 </html>
